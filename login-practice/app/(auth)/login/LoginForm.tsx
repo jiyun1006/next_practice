@@ -1,13 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import loginSchema, {
   loginFieldMessage,
   type LoginPayload,
 } from "@/schema/loginSchema";
-import FormField from "@/components/form/formField";
+import FormField from "@/components/form/FormField";
 
 export default function LoginForm({
   handleSubmit,
@@ -48,7 +47,7 @@ export default function LoginForm({
       <FormField
         id="password"
         name="password"
-        type="text"
+        type="password"
         placeholder="Password"
         value={payload.password}
         onChange={handleChange}
