@@ -7,6 +7,7 @@ import loginSchema, {
   loginFieldMessage,
   type LoginPayload,
 } from "@/schema/loginSchema";
+import FormField from "@/components/form/formField";
 
 export default function LoginForm({
   handleSubmit,
@@ -33,26 +34,27 @@ export default function LoginForm({
   return (
     <form action={handleSubmit} className="flex w-full max-w-sm flex-col gap-4">
       <h1 className="text-2xl font-bold">로그인</h1>
-      <div>
-        <Input
-          type="text"
-          name="userId"
-          placeholder="ID"
-          value={payload.userId}
-          onChange={handleChange}
-        />
-        <p className="text-sm text-red-500">{errors.userId}</p>
-      </div>
-      <div>
-        <Input
-          type="text"
-          name="password"
-          placeholder="Password"
-          value={payload.password}
-          onChange={handleChange}
-        />
-        <p className="text-sm text-red-500">{errors.password}</p>
-      </div>
+
+      <FormField
+        id="userId"
+        name="userId"
+        type="text"
+        placeholder="ID"
+        value={payload.userId}
+        onChange={handleChange}
+        error={errors.userId}
+      />
+
+      <FormField
+        id="password"
+        name="password"
+        type="text"
+        placeholder="Password"
+        value={payload.password}
+        onChange={handleChange}
+        error={errors.password}
+      />
+
       <Button type="submit" disabled={!isValid}>
         Login
       </Button>
