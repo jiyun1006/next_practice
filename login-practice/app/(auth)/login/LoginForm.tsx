@@ -1,18 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import loginSchema, {
   loginFieldMessage,
   type LoginPayload,
 } from "@/schema/loginSchema";
 import FormField from "@/components/form/FormField";
+import { loginAction } from "./actions";
 
-export default function LoginForm({
-  handleSubmit,
-}: {
-  handleSubmit: (formData: FormData) => Promise<void>;
-}) {
+export default function LoginForm() {
+  const [state, formAction, isPending] = useActionState(loginAction, {
+    message: "",
+  });
   const [payload, setPayload] = useState<LoginPayload>({
     userId: "",
     password: "",
@@ -31,7 +31,7 @@ export default function LoginForm({
   };
 
   return (
-    <form action={handleSubmit} className="flex w-full max-w-sm flex-col gap-4">
+    <form action={formAction} className="flex w-full max-w-sm flex-col gap-4">
       <h1 className="text-2xl font-bold">로그인</h1>
 
       <FormField
@@ -54,8 +54,8 @@ export default function LoginForm({
         error={errors.password}
       />
 
-      <Button type="submit" disabled={!isValid}>
-        Login
+      <Button type="submit" disabled={!isValid || isPending}>
+        {isPending ? "로그인 중..." : "Login"}
       </Button>
     </form>
   );
