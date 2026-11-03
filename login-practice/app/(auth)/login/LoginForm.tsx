@@ -8,6 +8,7 @@ import loginSchema, {
 } from "@/schema/loginSchema";
 import FormField from "@/components/form/FormField";
 import { loginAction } from "./actions";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [state, formAction, isPending] = useActionState(loginAction, {
@@ -57,6 +58,9 @@ export default function LoginForm() {
       <Button type="submit" disabled={!isValid || isPending}>
         {isPending ? "로그인 중..." : "Login"}
       </Button>
+      <Link href="/signup" className="text-sm text-gray-500 underline">
+        계정이 없나요? 회원가입
+      </Link>
     </form>
   );
 }
