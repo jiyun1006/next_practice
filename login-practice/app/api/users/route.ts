@@ -12,9 +12,11 @@ export async function POST(request: Request) {
     if(!parsed.success){
         return NextResponse.json({message: parsed.error.issues[0].message}, { status : 400});
     }
+
     const {userId, password} = parsed.data;
 
     await connectDB();
+    
     if (await User.findOne({userId})){
         return NextResponse.json({message: "이미 사용 중인 아이디입니다."}, {status :409});
     }
