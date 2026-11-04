@@ -4,6 +4,8 @@ import bcrypt from "bcryptjs";
 import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import loginSchema from "@/schema/loginSchema";
+import Kakao from "next-auth/providers/kakao";
+import Google from "next-auth/providers/google";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -28,6 +30,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return { id: user._id.toString(), name: user.userId };
       },
     }),
+    Kakao,
   ],
   pages: { signIn: "/login" },
 });
